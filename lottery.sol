@@ -54,12 +54,11 @@ contract lottery{
     
     // this function is called by user to make guess of answer
     function makeGuess(uint256 guess){
-        if(closedGame)
-        throw;
-        if(token[msg.sender]<1)
-        throw;
+        if(closedGame) throw;
+        if(guess<1 || guess> 1000000) throw;
+        if(token[msg.sender]<1) throw;
         token[msg.sender] = token[msg.sender]-1;
-        //
+        // check if guess is correct - declare the msg.sender the winner
         if(sha3(guess)==answer){
             // reward last gusser
             winner = msg.sender;
